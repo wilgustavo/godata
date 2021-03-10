@@ -14,22 +14,22 @@ type header struct {
 }
 
 type node struct {
-	value int
+	value interface{}
 	next  *node
 }
 
 // List is a Linked list opetations
 type List interface {
-	AddAt(pos uint, value int) (uint, error)
-	AddFirst(value int) uint
-	AddLast(value int) uint
-	GetAt(pos uint) (int, error)
-	GetFirst() (int, error)
+	AddAt(pos uint, value interface{}) (uint, error)
+	AddFirst(value interface{}) uint
+	AddLast(value interface{}) uint
+	GetAt(pos uint) (interface{}, error)
+	GetFirst() (interface{}, error)
 	Lenght() uint
 	RemoveFirst() (uint, error)
 	RemoveLast() (uint, error)
 	Revert()
-	ToSlice() []int
+	ToSlice() []interface{}
 }
 
 // NewLinkedList create a linked list
@@ -41,7 +41,7 @@ func (list *header) Lenght() uint {
 	return list.lenght
 }
 
-func (list *header) AddAt(pos uint, value int) (uint, error) {
+func (list *header) AddAt(pos uint, value interface{}) (uint, error) {
 	if pos > list.lenght {
 		return list.lenght, errors.New("index out of bound")
 	}
@@ -67,7 +67,7 @@ func (list *header) AddAt(pos uint, value int) (uint, error) {
 	return list.lenght, nil
 }
 
-func (list *header) AddFirst(value int) uint {
+func (list *header) AddFirst(value interface{}) uint {
 	list.lenght++
 	newNode := &node{value: value}
 	if list.last == nil {
@@ -80,7 +80,7 @@ func (list *header) AddFirst(value int) uint {
 	return list.lenght
 }
 
-func (list *header) AddLast(value int) uint {
+func (list *header) AddLast(value interface{}) uint {
 	list.lenght++
 	newNode := &node{value: value}
 	if list.first == nil {
@@ -93,23 +93,23 @@ func (list *header) AddLast(value int) uint {
 	return list.lenght
 }
 
-func (list *header) GetFirst() (int, error) {
+func (list *header) GetFirst() (interface{}, error) {
 	if list.lenght == 0 {
-		return 0, errors.New("list is empty")
+		return nil, errors.New("list is empty")
 	}
 	return list.first.value, nil
 }
 
-func (list *header) GetAt(pos uint) (int, error) {
+func (list *header) GetAt(pos uint) (interface{}, error) {
 	if pos >= uint(list.lenght) {
-		return 0, errors.New("index out of bounds")
+		return nil, errors.New("index out of bounds")
 	}
 	trav := list.getNodeAt(pos)
 	return trav.value, nil
 }
 
-func (list *header) ToSlice() []int {
-	result := []int{}
+func (list *header) ToSlice() []interface{} {
+	result := []interface{}{}
 	for node := list.first; node != nil; node = node.next {
 		result = append(result, node.value)
 	}

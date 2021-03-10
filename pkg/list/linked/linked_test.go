@@ -130,17 +130,17 @@ func TestToSlice(t *testing.T) {
 		list := linked.NewLinkedList()
 		list.AddLast(1)
 
-		assert.Equal(t, []int{1}, list.ToSlice())
+		assert.Equal(t, []interface{}{1}, list.ToSlice())
 
 		list.AddLast(5)
 		list.AddLast(13)
 		list.AddFirst(8)
-		assert.Equal(t, []int{8, 1, 5, 13}, list.ToSlice())
+		assert.Equal(t, []interface{}{8, 1, 5, 13}, list.ToSlice())
 	})
 
 	t.Run("Deberia retornar vacio si no hay elementos en la lista", func(t *testing.T) {
 		list := linked.NewLinkedList()
-		assert.Equal(t, []int{}, list.ToSlice())
+		assert.Equal(t, []interface{}{}, list.ToSlice())
 	})
 }
 
@@ -153,12 +153,12 @@ func TestRemoveLast(t *testing.T) {
 		len, err := list.RemoveLast()
 		assert.Equal(t, uint(1), len)
 		assert.NoError(t, err)
-		assert.Equal(t, []int{1}, list.ToSlice())
+		assert.Equal(t, []interface{}{1}, list.ToSlice())
 
 		len, err = list.RemoveLast()
 		assert.Equal(t, uint(0), len)
 		assert.NoError(t, err)
-		assert.Equal(t, []int{}, list.ToSlice())
+		assert.Equal(t, []interface{}{}, list.ToSlice())
 	})
 }
 
@@ -167,19 +167,19 @@ func TestRevert(t *testing.T) {
 		list := linked.NewLinkedList()
 		list.AddLast(5)
 		list.Revert()
-		assert.Equal(t, []int{5}, list.ToSlice())
+		assert.Equal(t, []interface{}{5}, list.ToSlice())
 
 		list.AddLast(77)
 		list.AddLast(999)
-		assert.Equal(t, []int{5, 77, 999}, list.ToSlice())
+		assert.Equal(t, []interface{}{5, 77, 999}, list.ToSlice())
 		list.Revert()
-		assert.Equal(t, []int{999, 77, 5}, list.ToSlice())
+		assert.Equal(t, []interface{}{999, 77, 5}, list.ToSlice())
 		list.Revert()
-		assert.Equal(t, []int{5, 77, 999}, list.ToSlice())
+		assert.Equal(t, []interface{}{5, 77, 999}, list.ToSlice())
 	})
 	t.Run("No deberia revertir una lista vacia", func(t *testing.T) {
 		list := linked.NewLinkedList()
 		list.Revert()
-		assert.Equal(t, []int{}, list.ToSlice())
+		assert.Equal(t, []interface{}{}, list.ToSlice())
 	})
 }
