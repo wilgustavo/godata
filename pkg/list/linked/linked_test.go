@@ -37,6 +37,19 @@ func TestAddFirst(t *testing.T) {
 
 }
 
+func TestGetFirst(t *testing.T) {
+	t.Run("Should give a firt elemet", func(t *testing.T) {
+		list := linked.NewLinkedList()
+		list.AddFirst("Mundo")
+		list.RemoveFirst()
+		list.AddLast("Hola")
+		list.AddLast("Mundo")
+		item, err := list.GetFirst()
+		assert.NoError(t, err)
+		assert.Equal(t, "Hola", item)
+	})
+}
+
 func TestAddLast(t *testing.T) {
 	t.Run("When append a value to empty list should be a length of 1", func(t *testing.T) {
 		list := linked.NewLinkedList()
