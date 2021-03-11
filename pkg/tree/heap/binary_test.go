@@ -24,12 +24,7 @@ func TestInsert(t *testing.T) {
 	t.Run("Should insert multiple items", func(t *testing.T) {
 
 		h := heap.NewBinaryHeap()
-		h.Insert(7)
-		h.Insert(1)
-		h.Insert(3)
-		h.Insert(8)
-		h.Insert(9)
-		h.Insert(5)
+		insertElements(h, 7, 1, 3, 8, 9, 5)
 		assert.Equal(t, []int{1, 7, 3, 8, 9, 5}, h.List())
 
 	})
