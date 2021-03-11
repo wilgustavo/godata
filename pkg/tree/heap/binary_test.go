@@ -56,23 +56,11 @@ func TestExtract(t *testing.T) {
 		h := heap.NewBinaryHeap()
 		insertElements(h, 7, 1, 3, 8, 9, 5)
 
-		item, _ := h.Extract()
-		assert.Equal(t, 1, item)
-
-		item, _ = h.Extract()
-		assert.Equal(t, 3, item)
-
-		item, _ = h.Extract()
-		assert.Equal(t, 5, item)
-
-		item, _ = h.Extract()
-		assert.Equal(t, 7, item)
-
-		item, _ = h.Extract()
-		assert.Equal(t, 8, item)
-
-		item, _ = h.Extract()
-		assert.Equal(t, 9, item)
+		for _, expected := range []int{1, 3, 5, 7, 8, 9} {
+			item, err := h.Extract()
+			assert.NoError(t, err)
+			assert.Equal(t, expected, item)
+		}
 
 		_, err := h.Extract()
 		assert.Error(t, err)
